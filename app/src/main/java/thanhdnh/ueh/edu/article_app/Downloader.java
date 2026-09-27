@@ -178,6 +178,7 @@ public class Downloader {
           );
         }
 
+
         if (progressBar != null) {
 
           progressBar.setVisibility(

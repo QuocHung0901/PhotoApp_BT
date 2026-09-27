@@ -10,6 +10,7 @@ public class UserProfile {
   private String email;
   private String description;
 
+
   // Chỉ lưu đường dẫn tới avatar
   private String avatarUrl;
 

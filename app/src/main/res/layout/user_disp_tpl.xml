@@ -21,6 +21,7 @@
         android:scaleType="centerCrop"
         android:contentDescription="User avatar" />
 
+
     <ProgressBar
         android:id="@+id/progressAvatar"
         android:layout_width="40dp"

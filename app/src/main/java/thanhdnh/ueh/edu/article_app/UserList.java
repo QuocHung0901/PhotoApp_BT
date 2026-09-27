@@ -15,6 +15,7 @@ public class UserList {
 
   }
 
+
   public void addUser(UserProfile user) {
 
     users.add(user);

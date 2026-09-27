@@ -115,6 +115,7 @@ public class UserAdapter extends BaseAdapter {
             holder.progressAvatar
     );
 
+
     return convertView;
   }
 

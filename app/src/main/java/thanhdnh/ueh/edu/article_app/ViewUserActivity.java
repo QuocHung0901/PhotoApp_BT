@@ -88,6 +88,8 @@ public class ViewUserActivity extends AppCompatActivity {
                 hobby
         );
 
+
+
         // ==========================================
         // LOAD AVATAR
         // ==========================================

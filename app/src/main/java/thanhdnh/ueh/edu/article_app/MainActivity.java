@@ -86,6 +86,7 @@ public class MainActivity
                       user.getUsername()
               );
 
+
               intent.putExtra(
                       "email",
                       user.getEmail()
