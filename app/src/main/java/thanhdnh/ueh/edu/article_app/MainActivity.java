@@ -8,27 +8,108 @@ import android.widget.GridView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
-  public GridView gridview;
+public class MainActivity
+        extends AppCompatActivity {
 
-  private AdapterView.OnItemClickListener onitemclick = new AdapterView.OnItemClickListener() {
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-      Intent intent = new Intent(getBaseContext(), ViewArticleActivity.class);
-      intent.putExtra("id", gridview.getAdapter().getItemId(position));
-      startActivity(intent);
-    }
-  };
+  private GridView gridUsers;
+
+  private UserList userList;
+
+  private UserAdapter userAdapter;
 
   @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  protected void onCreate(
+          Bundle savedInstanceState
+  ) {
+
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    getSupportActionBar().hide();
 
-    gridview = findViewById(R.id.gridview);
-    new ArticleData(getBaseContext(), gridview).loadData("https://raw.githubusercontent.com/thanhdnh/json/main/products.json", this);
-    gridview.setOnItemClickListener(onitemclick);
+    setContentView(
+            R.layout.activity_main
+    );
+
+    // ==========================================
+    // GRID VIEW
+    // ==========================================
+
+    gridUsers =
+            findViewById(
+                    R.id.gridUsers
+            );
+
+    // ==========================================
+    // USER LIST
+    // ==========================================
+
+    userList =
+            UserData.createUserList();
+
+    // ==========================================
+    // ADAPTER
+    // ==========================================
+
+    userAdapter =
+            new UserAdapter(
+                    this,
+                    userList.getUsers()
+            );
+
+    gridUsers.setAdapter(
+            userAdapter
+    );
+
+    // ==========================================
+    // CLICK USER
+    // ==========================================
+
+    gridUsers.setOnItemClickListener(
+            (parent, view, position, id) -> {
+
+              UserProfile user =
+                      userList.getUser(
+                              position
+                      );
+
+              Intent intent =
+                      new Intent(
+                              MainActivity.this,
+                              ViewUserActivity.class
+                      );
+
+              intent.putExtra(
+                      "id",
+                      user.getId()
+              );
+
+              intent.putExtra(
+                      "username",
+                      user.getUsername()
+              );
+
+              intent.putExtra(
+                      "email",
+                      user.getEmail()
+              );
+
+              intent.putExtra(
+                      "description",
+                      user.getDescription()
+              );
+
+              intent.putExtra(
+                      "avatar_url",
+                      user.getAvatarUrl()
+              );
+
+              intent.putExtra(
+                      "hobby",
+                      user.getHobby()
+              );
+
+              startActivity(
+                      intent
+              );
+            }
+    );
   }
-
 }
