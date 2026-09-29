@@ -96,17 +96,9 @@ public class UserAdapter extends BaseAdapter {
     UserProfile user =
             userList.get(position);
 
-    // ==========================================
-    // USERNAME
-    // ==========================================
-
     holder.txtUsername.setText(
             user.getUsername()
     );
-
-    // ==========================================
-    // AVATAR
-    // ==========================================
 
     Downloader.downloadWithProgress(
             context,
@@ -118,10 +110,6 @@ public class UserAdapter extends BaseAdapter {
 
     return convertView;
   }
-
-  // ==============================================
-  // VIEW HOLDER
-  // ==============================================
 
   private static class ViewHolder {
 

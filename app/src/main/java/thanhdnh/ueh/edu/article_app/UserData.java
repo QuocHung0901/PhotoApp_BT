@@ -31,10 +31,6 @@ public class UserData {
 
             try {
 
-                // =========================================
-                // MỞ URL JSON
-                // =========================================
-
                 URL url = new URL(jsonUrl);
 
                 connection =
@@ -45,10 +41,6 @@ public class UserData {
                 connection.setReadTimeout(10000);
 
                 connection.connect();
-
-                // =========================================
-                // ĐỌC NỘI DUNG JSON
-                // =========================================
 
                 reader =
                         new BufferedReader(
@@ -67,9 +59,6 @@ public class UserData {
                     json.append(line);
                 }
 
-                // =========================================
-                // JSON -> USER LIST
-                // =========================================
 
                 Gson gson = new Gson();
 
@@ -79,9 +68,7 @@ public class UserData {
                                 UserList.class
                         );
 
-                // =========================================
-                // TRẢ KẾT QUẢ VỀ UI THREAD
-                // =========================================
+
 
                 new Handler(
                         Looper.getMainLooper()

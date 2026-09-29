@@ -16,10 +16,6 @@ public class ViewUserActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_view_user);
 
-        // ==========================================
-        // ÁNH XẠ VIEW
-        // ==========================================
-
         TextView txtUsername =
                 findViewById(R.id.txtUsername);
 
@@ -44,10 +40,6 @@ public class ViewUserActivity extends AppCompatActivity {
         Button btnBack =
                 findViewById(R.id.btnBack);
 
-        // ==========================================
-        // NHẬN DATA TỪ MAINACTIVITY
-        // ==========================================
-
         String id =
                 getIntent().getStringExtra("id");
 
@@ -66,9 +58,6 @@ public class ViewUserActivity extends AppCompatActivity {
         String hobby =
                 getIntent().getStringExtra("hobby");
 
-        // ==========================================
-        // HIỂN THỊ THÔNG TIN USER
-        // ==========================================
 
         txtUsername.setText(username);
 
@@ -89,11 +78,6 @@ public class ViewUserActivity extends AppCompatActivity {
         );
 
 
-
-        // ==========================================
-        // LOAD AVATAR
-        // ==========================================
-
         Downloader.downloadWithProgress(
                 this,
                 avatarUrl,
@@ -101,9 +85,6 @@ public class ViewUserActivity extends AppCompatActivity {
                 progressAvatar
         );
 
-        // ==========================================
-        // BACK
-        // ==========================================
 
         btnBack.setOnClickListener(
                 view -> finish()

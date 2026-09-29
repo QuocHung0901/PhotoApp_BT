@@ -14,10 +14,6 @@ import java.net.URL;
 
 public class Downloader {
 
-  // =====================================================
-  // DOWNLOAD WITH PROGRESS
-  // =====================================================
-
   public static void downloadWithProgress(
           Context context,
           String imageUrl,
@@ -25,12 +21,8 @@ public class Downloader {
           ProgressBar progressBar
   ) {
 
-    // Xóa ảnh cũ nếu View được tái sử dụng
     imageView.setImageDrawable(null);
 
-    // =================================================
-    // KHÔNG CÓ ĐƯỜNG DẪN
-    // =================================================
 
     if (imageUrl == null
             || imageUrl.trim().isEmpty()) {
@@ -46,12 +38,6 @@ public class Downloader {
       progressBar.setVisibility(View.VISIBLE);
     }
 
-    // =================================================
-    // ẢNH LOCAL TRONG res/drawable
-    //
-    // Ví dụ:
-    // drawable/avatar_user1
-    // =================================================
 
     if (imageUrl.startsWith("drawable/")) {
 
@@ -85,12 +71,6 @@ public class Downloader {
 
       return;
     }
-
-    // =================================================
-    // HỖ TRỢ ĐƯỜNG DẪN android.resource://
-    // nếu sau này bạn cần dùng lại
-    // =================================================
-
     if (imageUrl.startsWith(
             "android.resource://"
     )) {
@@ -108,11 +88,6 @@ public class Downloader {
 
       return;
     }
-
-    // =================================================
-    // ẢNH TỪ INTERNET
-    // =================================================
-
     new Thread(() -> {
 
       Bitmap bitmap = null;
@@ -189,10 +164,6 @@ public class Downloader {
 
     }).start();
   }
-
-  // =====================================================
-  // PHIÊN BẢN KHÔNG CÓ PROGRESS BAR
-  // =====================================================
 
   public static void downloadWithProgress(
           Context context,

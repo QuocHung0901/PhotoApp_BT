@@ -15,10 +15,6 @@ public class MainActivity extends AppCompatActivity {
 
     private UserAdapter userAdapter;
 
-    // =============================================
-    // URL FILE JSON TRÊN GITHUB
-    // =============================================
-
     private static final String USER_DATA_URL =
             "https://raw.githubusercontent.com/QuocHung0901/PhotoApp_BT/master/data/users.json";
 
@@ -32,19 +28,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(
                 R.layout.activity_main
         );
-
-        // =============================================
-        // GRID VIEW
-        // =============================================
-
         gridUsers =
                 findViewById(
                         R.id.gridUsers
                 );
-
-        // =============================================
-        // CLICK USER
-        // =============================================
 
         gridUsers.setOnItemClickListener(
                 (parent, view, position, id) -> {
@@ -95,10 +82,6 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
         );
-
-        // =============================================
-        // TẢI USER TỪ GITHUB
-        // =============================================
 
         loadUsers();
     }
