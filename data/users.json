@@ -1,0 +1,36 @@
+{
+  "users": [
+    {
+      "id": "U001",
+      "username": "User 1",
+      "email": "user1@gmail.com",
+      "description": "Sinh viên yêu thích công nghệ, lập trình và các ứng dụng di động.",
+      "avatar_url": "",
+      "hobby": "Football, Music, Coding"
+    },
+    {
+      "id": "U002",
+      "username": "User 2",
+      "email": "user2@gmail.com",
+      "description": "Sinh viên yêu thích thiết kế, nhiếp ảnh và sáng tạo nội dung.",
+      "avatar_url": "",
+      "hobby": "Photography, Design, Travel"
+    },
+    {
+      "id": "U003",
+      "username": "User 3",
+      "email": "user3@gmail.com",
+      "description": "Yêu thích nghiên cứu trí tuệ nhân tạo và khoa học dữ liệu.",
+      "avatar_url": "",
+      "hobby": "AI, Data, Reading"
+    },
+    {
+      "id": "U004",
+      "username": "User 4",
+      "email": "user4@gmail.com",
+      "description": "Quan tâm đến phát triển phần mềm và công nghệ web.",
+      "avatar_url": "",
+      "hobby": "Web, Gaming, Music"
+    }
+  ]
+}
