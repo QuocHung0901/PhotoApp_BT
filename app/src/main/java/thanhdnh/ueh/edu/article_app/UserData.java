@@ -1,100 +1,120 @@
 package thanhdnh.ueh.edu.article_app;
 
+import android.os.Handler;
+import android.os.Looper;
+
+import com.google.gson.Gson;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 public class UserData {
 
-    public static UserList createUserList() {
+    public interface OnUserDataLoadedListener {
 
-        UserList userList = new UserList();
+        void onLoaded(UserList userList);
 
-        // =====================================================
-        // USER 1
-        // =====================================================
+        void onError(Exception exception);
+    }
 
+    public static void loadData(
+            String jsonUrl,
+            OnUserDataLoadedListener listener
+    ) {
 
-        userList.addUser(
-                new UserProfile(
-                        "U001",
+        new Thread(() -> {
 
-                        "User 1",
+            HttpURLConnection connection = null;
+            BufferedReader reader = null;
 
-                        "user1@gmail.com",
+            try {
 
-                        "Sinh viên yêu thích công nghệ, "
-                                + "lập trình và các ứng dụng di động.",
+                // =========================================
+                // MỞ URL JSON
+                // =========================================
 
-                        // Chỉ lưu đường dẫn ảnh
-                        "drawable/avatar_user1",
+                URL url = new URL(jsonUrl);
 
-                        "Football, Music, Coding"
-                )
-        );
+                connection =
+                        (HttpURLConnection) url.openConnection();
 
-        // =====================================================
-        // USER 2
-        // =====================================================
+                connection.setRequestMethod("GET");
+                connection.setConnectTimeout(10000);
+                connection.setReadTimeout(10000);
 
-        userList.addUser(
-                new UserProfile(
-                        "U002",
+                connection.connect();
 
-                        "User 2",
+                // =========================================
+                // ĐỌC NỘI DUNG JSON
+                // =========================================
 
-                        "user2@gmail.com",
+                reader =
+                        new BufferedReader(
+                                new InputStreamReader(
+                                        connection.getInputStream()
+                                )
+                        );
 
-                        "Sinh viên yêu thích thiết kế, "
-                                + "nhiếp ảnh và sáng tạo nội dung.",
+                StringBuilder json =
+                        new StringBuilder();
 
-                        // Chỉ lưu đường dẫn ảnh
-                        "drawable/avatar_user2",
+                String line;
 
-                        "Photography, Design, Travel"
-                )
-        );
+                while ((line = reader.readLine()) != null) {
 
-        // =====================================================
-        // USER 3
-        // =====================================================
+                    json.append(line);
+                }
 
-        userList.addUser(
-                new UserProfile(
-                        "U003",
+                // =========================================
+                // JSON -> USER LIST
+                // =========================================
 
-                        "User 3",
+                Gson gson = new Gson();
 
-                        "user3@gmail.com",
+                UserList userList =
+                        gson.fromJson(
+                                json.toString(),
+                                UserList.class
+                        );
 
-                        "Yêu thích nghiên cứu trí tuệ nhân tạo "
-                                + "và khoa học dữ liệu.",
+                // =========================================
+                // TRẢ KẾT QUẢ VỀ UI THREAD
+                // =========================================
 
-                        // Chỉ lưu đường dẫn ảnh
-                        "drawable/avatar_user3",
+                new Handler(
+                        Looper.getMainLooper()
+                ).post(() -> {
 
-                        "AI, Data, Reading"
-                )
-        );
+                    listener.onLoaded(userList);
+                });
 
-        // =====================================================
-        // USER 4
-        // =====================================================
+            } catch (Exception e) {
 
-        userList.addUser(
-                new UserProfile(
-                        "U004",
+                new Handler(
+                        Looper.getMainLooper()
+                ).post(() -> {
 
-                        "User 4",
+                    listener.onError(e);
+                });
 
-                        "user4@gmail.com",
+            } finally {
 
-                        "Quan tâm đến phát triển phần mềm "
-                                + "và công nghệ web.",
+                try {
 
-                        // Chỉ lưu đường dẫn ảnh
-                        "drawable/avatar_user4",
+                    if (reader != null) {
+                        reader.close();
+                    }
 
-                        "Web, Gaming, Music"
-                )
-        );
+                } catch (Exception ignored) {
+                }
 
-        return userList;
+                if (connection != null) {
+                    connection.disconnect();
+                }
+            }
+
+        }).start();
     }
 }

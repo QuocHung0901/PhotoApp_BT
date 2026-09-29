@@ -1,6 +1,5 @@
 package thanhdnh.ueh.edu.article_app;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class UserProfile {
@@ -10,11 +9,13 @@ public class UserProfile {
   private String email;
   private String description;
 
-
-  // Chỉ lưu đường dẫn tới avatar
+  @SerializedName("avatar_url")
   private String avatarUrl;
 
   private String hobby;
+
+  public UserProfile() {
+  }
 
   public UserProfile(
           String id,
@@ -24,7 +25,6 @@ public class UserProfile {
           String avatarUrl,
           String hobby
   ) {
-
     this.id = id;
     this.username = username;
     this.email = email;
